@@ -16,6 +16,15 @@ public class AutoTour {
 	private boolean homeIsDestination;
 	private int ltripnoSum = 0;
 	
+	public boolean homeIsOrigin()
+	{
+		return homeIsOrigin;
+	}
+	
+	public boolean homeIsDestination()
+	{
+		return homeIsDestination;
+	}
 	
 	public AutoTour(ArrayList<AutoTripSegment> tourAttrib)
 	{
