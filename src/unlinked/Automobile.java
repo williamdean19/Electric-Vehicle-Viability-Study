@@ -9,6 +9,7 @@ public class Automobile {
 		//if the arraylist does not have SAMPN and VEHNO all the same, then it is not a valid list of tours for this automobile
 	}
 	
+<<<<<<< HEAD
 	public String toString()
 	{
 		/*
@@ -34,6 +35,8 @@ public class Automobile {
 		return true;
 	}
 	
+=======
+>>>>>>> c11c5396def61edea1e65a9384004baa221d1fa8
 	public double totalTimeAtHome()
 	{
 		double timeAtHome = 0;
@@ -61,7 +64,10 @@ public class Automobile {
 		
 		return timeDriven;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c11c5396def61edea1e65a9384004baa221d1fa8
 
 	//public int numTours()
 	

@@ -17,7 +17,7 @@ public class StaticMethods {
 			double avgAutoTourDuration = 0.0;
 			double avgAutoTourTravelTime = 0.0;
 			double avgAutoTourActivityTime = 0.0;
-	
+
 			StaticMethods.countAutoTourCollectionAttributes(autoTourCollection, incompleteTours,
 					toursWithMultVehicles, toursWithMultHH, faultyLTripNoSequences,
 					toursWithMultHHAndFaultyTripNoSequences); 
@@ -130,6 +130,7 @@ public class StaticMethods {
 	static void trimVehicleArrayListToUsedAutomobiles(ArrayList<Vehicle> vehicles) {
 		for(int i = vehicles.size() - 1; i >= 0; i--)
 		{
+
 			if(	   ! (vehicles.get(i).getBODY().equals("1")
 					  ||vehicles.get(i).getBODY().equals("2")
 					  ||vehicles.get(i).getBODY().equals("3")
@@ -138,11 +139,13 @@ public class StaticMethods {
 					 )
 					||vehicles.get(i).getCNTV().equals("2")
 					)
+
 			{
 				vehicles.remove(i);
 			}
 		}
 	}
+
 	static void computeAverageAutomobileDistanceDriven()
 	{
 		
@@ -163,4 +166,5 @@ public class StaticMethods {
 		
 	}
 	
+
 }
