@@ -5,44 +5,50 @@ import java.util.ArrayList;
 public class Automobile {
 
 	private ArrayList<AutoTour> automobileTours;
-	
+
 	private boolean isValidAutomobile = true;
 	private int electricAutomobileRange = 40;
 
+
+	public Automobile(ArrayList<AutoTour> automobileAttrib)
+	{
+		automobileTours = automobileAttrib;
+
+		// The following for loop checks if the auto tours consisiting this vehicle have the same sampn and vehno
+		// It is assumed no tour has multiple sampns or vehnos, we only check against the trip of each tour
+		for(int i = 0; i < automobileTours.size(); i++)
+		{
+			if(!(automobileTours.get(0).getTrips().get(0).getSAMPN().equals(automobileTours.get(i).getTrips().get(0).getSAMPN())))
+			{
+				setValidAutomobile(false);
+			}
+
+			if(!(automobileTours.get(0).getTrips().get(0).getVEHNO().equals(automobileTours.get(i).getTrips().get(0).getVEHNO())))
+			{
+				setValidAutomobile(false);
+			}
+		}
+		
+	}
+
+	public void resetAutomobileRange()
+	{
+		electricAutomobileRange = 40;
+	}
+
+	public void incrementAutomobileRange()
+	{
+		electricAutomobileRange++;
+	}
 
 	public void setAutomobileRange(int r)
 	{
 		electricAutomobileRange = r;
 	}
-	
+
 	public int getAutomobileRange()
 	{
 		return electricAutomobileRange;
-	}
-	
-	
-	public Automobile(ArrayList<AutoTour> automobileAttrib)
-	{
-		automobileTours = automobileAttrib;
-		
-		// The following for loop checks if the auto tours consisiting this vehicle have the same sampn and vehno
-		// It is assumed no tour has multiple sampns or vehnos, we only check against the trip of each tour
-		for(int i = 0; i < automobileTours.size(); i++)
-		{
-			
-			if(automobileTours.get(0).getTrips().get(0).getSAMPN() != automobileTours.get(i).getTrips().get(0).getSAMPN())
-			{
-				setValidAutomobile(false);
-			}
-			
-			if(automobileTours.get(0).getTrips().get(0).getVEHNO() != automobileTours.get(i).getTrips().get(0).getSAMPN())
-			{
-				setValidAutomobile(false);
-			}
-				
-		}
-
-		//if the arraylist does not have SAMPN and VEHNO all the same, then it is not a valid list of tours for this automobile
 	}
 
 	public ArrayList<AutoTour> getTours()
@@ -52,12 +58,27 @@ public class Automobile {
 
 	public String toString()
 	{
+		String listOfSampns = "";
+		String listOfVehnos = "";
+
+		for(int i = 0; i < automobileTours.size(); i++)
+		{
+			listOfSampns += automobileTours.get(i).getTrips().get(0).getSAMPN() + " ";
+		}
+
+		for(int i = 0; i < automobileTours.size(); i++)
+		{
+			listOfVehnos += automobileTours.get(i).getTrips().get(0).getVEHNO() + " ";
+		}
 		/*
 		 * Information to include:
+		 * 
+		 * vehno and sampn for each tour
+		 * 
 		 * Starting location, drive time and distance between activities, destination purposes, ending location
 		 * Total miles, total time driven, total time parked, total time at home
 		 */
-		return "";
+		return listOfSampns + " " + listOfVehnos;
 	}
 
 	public boolean meetsElectricVehicleRequirements()
@@ -97,7 +118,7 @@ public class Automobile {
 		{
 			timeParked += automobileTours.get(i).totalActivityTimeOnTour();
 		}
-		
+
 		return timeParked;
 	}
 
@@ -109,7 +130,7 @@ public class Automobile {
 		{
 			milesDriven += automobileTours.get(i).totalTourMiles();
 		}
-		
+
 		return milesDriven;
 	}
 
@@ -121,7 +142,7 @@ public class Automobile {
 		{
 			timeDriven += automobileTours.get(i).totalTravelingTimeOnTour();
 		}
-		
+
 		return timeDriven;
 	}
 
@@ -134,7 +155,10 @@ public class Automobile {
 	}
 
 
-	//public int numTours()
+	public int numTours()
+	{
+		return automobileTours.size();
+	}
 
 	//public double timeBetweenTours()
 

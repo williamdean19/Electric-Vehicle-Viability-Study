@@ -243,7 +243,31 @@ public class Driver {
 			
 			System.out.println("There are " + vehicles.size() + " automobiles that were used in the vehicles.csv file.") ;
 		}
+		
+		int numInvalidAutomobiles = 0;
+		int numPotentialElectricAutomobiles = 0;
+		
+		for (int i = 0; i < automobileCollection.size(); i++)
+		{
+			if (automobileCollection.get(i).isValidAutomobile() == false)
+			{
+				numInvalidAutomobiles++;
+			}
+			
+			if(automobileCollection.get(i).meetsElectricVehicleRequirements())
+			{
+				numPotentialElectricAutomobiles++;
+			}
+			
+			//System.out.println(automobileCollection.get(i).toString());
+			
+		}
 
+		System.out.println("The number of invalid automobiles is: " + numInvalidAutomobiles + "\n" +
+							"The number of potentially electric vehicles is: " + numPotentialElectricAutomobiles
+				);
+		
+		
 		System.out.println("End of testing!!!");
 
 	}
