@@ -165,6 +165,113 @@ public class StaticMethods {
 	{
 		
 	}
+
+	static void computeRemainingRangeOfAutomobiles(ArrayList<Automobile> automobileCollection) {
+		int numInvalidAutomobiles = 0;
+		int numPotentialElectricAutomobiles = 0;
+		int numPotentialElectricAutomobiles0_5RemainingInRange = 0;
+		int numPotentialElectricAutomobiles6_9RemainingInRange = 0;
+		int numPotentialElectricAutomobiles10_19RemainingInRange = 0;
+		int numPotentialElectricAutomobiles20_29RemainingInRange = 0;
+		int numPotentialElectricAutomobiles30_39RemainingInRange = 0;
+		int numPotentialElectricAutomobiles39_40RemainingInRange = 0;
+		int numPotentialElectricAutomobiles41_49RemainingInRange = 0;
+		int numPotentialElectricAutomobiles50_59RemainingInRange = 0;
+		int numPotentialElectricAutomobiles60_69RemainingInRange = 0;
+		int numPotentialElectricAutomobiles70PlusRemainingInRange = 0;
+		
+	
+	
+	
+		//No charging vehicles during day at all:
+		
+		for (int i = 0; i < automobileCollection.size(); i++)
+		{
+			if (automobileCollection.get(i).isValidAutomobile() == false)
+			{
+				numInvalidAutomobiles++;
+			}
+	
+			if(automobileCollection.get(i).meetsElectricVehicleRequirements())
+			{
+				numPotentialElectricAutomobiles++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() >= 0 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 5)
+			{
+				numPotentialElectricAutomobiles0_5RemainingInRange++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 5 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 9 )
+			{
+				numPotentialElectricAutomobiles6_9RemainingInRange++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 9 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 19)
+			{
+				numPotentialElectricAutomobiles10_19RemainingInRange++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 19 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 29)
+			{
+				numPotentialElectricAutomobiles20_29RemainingInRange++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 29 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 39)
+			{
+				numPotentialElectricAutomobiles30_39RemainingInRange++;
+			}
+	
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 39 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 40)
+			{
+				numPotentialElectricAutomobiles39_40RemainingInRange++;
+			}
+			
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 40 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 49)
+			{
+				numPotentialElectricAutomobiles41_49RemainingInRange++;
+			}
+
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 49
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 59)
+			{
+				numPotentialElectricAutomobiles50_59RemainingInRange++;
+			}
+			
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 59 
+					&& automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() <= 69)
+			{
+				numPotentialElectricAutomobiles60_69RemainingInRange++;
+			}
+			
+			if(automobileCollection.get(i).getAutomobileRange() - automobileCollection.get(i).totalMilesDriven() > 69 )
+			{
+				numPotentialElectricAutomobiles70PlusRemainingInRange++;
+			}
+			
+			
+		}
+		System.out.println("The number of invalid automobiles is: " + numInvalidAutomobiles + "\n" +
+				"The number of potentially electric vehicles is: " + numPotentialElectricAutomobiles + "\n" +
+				"The number of potentially electric vehicles with  0-5 miles left in its range is: " + numPotentialElectricAutomobiles0_5RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with  6-9 miles left in its range is: " + numPotentialElectricAutomobiles6_9RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 10-19 miles left in its range is: " + numPotentialElectricAutomobiles10_19RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 20-29 miles left in its range is: " + numPotentialElectricAutomobiles20_29RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 30-39 miles left in its range is: " + numPotentialElectricAutomobiles30_39RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 39-40 miles left in its range is: " + numPotentialElectricAutomobiles39_40RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 41-49 miles left in its range is: " + numPotentialElectricAutomobiles41_49RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 50-59 miles left in its range is: " + numPotentialElectricAutomobiles50_59RemainingInRange + "\n" +
+				"The number of potentially electric vehicles with 60-69 miles left in its range is: " + numPotentialElectricAutomobiles60_69RemainingInRange + "\n" + 
+				"The number of potentially electric vehicles with 70 plus miles left in its range is: " + numPotentialElectricAutomobiles70PlusRemainingInRange + "\n"
+				);
+	}
 	
 
 }

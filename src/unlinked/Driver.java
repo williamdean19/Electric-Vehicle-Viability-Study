@@ -240,35 +240,93 @@ public class Driver {
 			vehicles = CsvFileReader.vehicleCsvFileToArrayList("VEH_Public.csv");
 
 			StaticMethods.trimVehicleArrayListToUsedAutomobiles(vehicles);
-			
+
 			System.out.println("There are " + vehicles.size() + " automobiles that were used in the vehicles.csv file.") ;
 		}
-		
-		int numInvalidAutomobiles = 0;
-		int numPotentialElectricAutomobiles = 0;
-		
-		for (int i = 0; i < automobileCollection.size(); i++)
+		System.out.println("\nNo charging throughout day: ");
+		StaticMethods.computeRemainingRangeOfAutomobiles(automobileCollection);
+
+		System.out.println("If we allow charging during the day at home only, using slow charging (10 hours from no charge to max charge, 1 mile/15 min):");
+		for(int i = 0; i < automobileCollection.size(); i++)
 		{
-			if (automobileCollection.get(i).isValidAutomobile() == false)
-			{
-				numInvalidAutomobiles++;
-			}
-			
-			if(automobileCollection.get(i).meetsElectricVehicleRequirements())
-			{
-				numPotentialElectricAutomobiles++;
-			}
-			
-			//System.out.println(automobileCollection.get(i).toString());
-			
+			automobileCollection.get(i).resetAutomobileRange();
 		}
 
-		System.out.println("The number of invalid automobiles is: " + numInvalidAutomobiles + "\n" +
-							"The number of potentially electric vehicles is: " + numPotentialElectricAutomobiles
-				);
-		
-		
-		System.out.println("End of testing!!!");
+		for(int i = 0; i < automobileCollection.size(); i++)
+		{
+			ArrayList<AutoTour> thisAuto = automobileCollection.get(i).getTours();
+			if (thisAuto.size() > 1)
+			{
+				for(int j = 0; j < thisAuto.size() - 1; j++)
+				{
+					int numTrips = thisAuto.get(j).getTrips().size();
+					if(thisAuto.get(j).getTrips().get(numTrips - 1).getDHOME().equals("1"))
+					{
+						int actDur = Integer.parseInt(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
+						int m = 0;
+						double thisTourMiles = thisAuto.get(j).totalTourMiles();
+					
+							for(int k = 0; k < actDur; k = k+15)
+							{					
+								m++;	
+								if(m >= thisTourMiles)
+								{
+									break; //we've reached max charge
+								}
+								automobileCollection.get(i).incrementAutomobileRange();
+							}
+							
+						
+					}
+				}
+			}
+		}
 
+		StaticMethods.computeRemainingRangeOfAutomobiles(automobileCollection);
+
+
+
+
+		System.out.println("If we allow charging during the day at home only, using fast charging (4 hours from no charge to max charge, 1 mile/6 min):");
+		for(int i = 0; i < automobileCollection.size(); i++)
+		{
+			automobileCollection.get(i).resetAutomobileRange();
+		}
+
+		for(int i = 0; i < automobileCollection.size(); i++)
+		{
+			ArrayList<AutoTour> thisAuto = automobileCollection.get(i).getTours();
+			if (thisAuto.size() > 1)
+			{
+				for(int j = 0; j < thisAuto.size() - 1; j++)
+				{
+					int numTrips = thisAuto.get(j).getTrips().size();
+					if(thisAuto.get(j).getTrips().get(numTrips - 1).getDHOME().equals("1"))
+					{
+						int actDur = Integer.parseInt(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
+						int m = 0;
+						double thisTourMiles = thisAuto.get(j).totalTourMiles();
+						
+							for(int k = 0; k < actDur; k = k+6)
+							{					
+								m++;	
+								if(m >= thisTourMiles)
+								{
+									break; //we've reached max charge
+								}
+								automobileCollection.get(i).incrementAutomobileRange();
+							}
+							
+						
+					}
+				}
+			}
+		}
+
+		StaticMethods.computeRemainingRangeOfAutomobiles(automobileCollection);
+
+		//If we let cars charge while on a tour when the destination is home, work, , 
+
+		System.out.println("End of testing!!!");
 	}
 }
