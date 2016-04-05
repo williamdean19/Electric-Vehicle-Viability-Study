@@ -251,7 +251,6 @@ public class Driver {
 		{
 			automobileCollection.get(i).resetAutomobileRange();
 		}
-
 		for(int i = 0; i < automobileCollection.size(); i++)
 		{
 			ArrayList<AutoTour> thisAuto = automobileCollection.get(i).getTours();
@@ -262,21 +261,10 @@ public class Driver {
 					int numTrips = thisAuto.get(j).getTrips().size();
 					if(thisAuto.get(j).getTrips().get(numTrips - 1).getDHOME().equals("1"))
 					{
-						int actDur = Integer.parseInt(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
-						int m = 0;
+						double actDur = Double.parseDouble(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
 						double thisTourMiles = thisAuto.get(j).totalTourMiles();
-					
-							for(int k = 0; k < actDur; k = k+15)
-							{					
-								m++;	
-								if(m >= thisTourMiles)
-								{
-									break; //we've reached max charge
-								}
-								automobileCollection.get(i).incrementAutomobileRange();
-							}
-							
-						
+						double increasedRange = Math.min(thisTourMiles, actDur/15);
+						automobileCollection.get(i).setAutomobileRange(automobileCollection.get(i).getAutomobileRange() + increasedRange );
 					}
 				}
 			}
@@ -292,7 +280,6 @@ public class Driver {
 		{
 			automobileCollection.get(i).resetAutomobileRange();
 		}
-
 		for(int i = 0; i < automobileCollection.size(); i++)
 		{
 			ArrayList<AutoTour> thisAuto = automobileCollection.get(i).getTours();
@@ -303,21 +290,10 @@ public class Driver {
 					int numTrips = thisAuto.get(j).getTrips().size();
 					if(thisAuto.get(j).getTrips().get(numTrips - 1).getDHOME().equals("1"))
 					{
-						int actDur = Integer.parseInt(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
-						int m = 0;
+						double actDur = Double.parseDouble(thisAuto.get(j).getTrips().get(numTrips - 1).getACTDUR());
 						double thisTourMiles = thisAuto.get(j).totalTourMiles();
-						
-							for(int k = 0; k < actDur; k = k+6)
-							{					
-								m++;	
-								if(m >= thisTourMiles)
-								{
-									break; //we've reached max charge
-								}
-								automobileCollection.get(i).incrementAutomobileRange();
-							}
-							
-						
+						double increasedRange = Math.min(thisTourMiles, actDur/6);
+						automobileCollection.get(i).setAutomobileRange(automobileCollection.get(i).getAutomobileRange() + increasedRange );
 					}
 				}
 			}

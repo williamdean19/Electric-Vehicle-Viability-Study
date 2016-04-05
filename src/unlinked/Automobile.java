@@ -6,8 +6,10 @@ public class Automobile {
 
 	private ArrayList<AutoTour> automobileTours;
 
+	public static final int RANGE = 40;
+	
 	private boolean isValidAutomobile = true;
-	private int electricAutomobileRange = 40;
+	private double electricAutomobileRange = RANGE;
 
 
 	public Automobile(ArrayList<AutoTour> automobileAttrib)
@@ -41,12 +43,12 @@ public class Automobile {
 		electricAutomobileRange++;
 	}
 
-	public void setAutomobileRange(int r)
+	public void setAutomobileRange(double d)
 	{
-		electricAutomobileRange = r;
+		electricAutomobileRange = d;
 	}
 
-	public int getAutomobileRange()
+	public double getAutomobileRange()
 	{
 		return electricAutomobileRange;
 	}
